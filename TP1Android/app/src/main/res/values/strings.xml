@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TP1-Android</string>
+    <string name="btnQuitter">Quitter</string>
+    <string name="btnEnvoyer">Envoyer</string>
+</resources>
