@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MemorAh</string>
+    <string name="btnPlay">Jouer</string>
+    <string name="btnCollection">Collection</string>
+    <string name="textSounds">Sons</string>
+    <string name="textMusic">Musique</string>
+    <string name="textScore">Score</string>
+</resources>

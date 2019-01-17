@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MemorAh</string>
+    <string name="btnPlay">Play</string>
+    <string name="btnCollection">Collection</string>
+    <string name="textSounds">Sounds</string>
+    <string name="textMusic">Music</string>
+    <string name="textScore">Score</string>
 </resources>
