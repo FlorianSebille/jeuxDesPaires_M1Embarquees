@@ -1,5 +1,11 @@
 <resources>
-    <string name="app_name">TP1-Android</string>
-    <string name="btnQuitter">Quitter</string>
-    <string name="btnEnvoyer">Envoyer</string>
+    <string name="app_name">TP1-Android US</string>
+    <string name="btnQuitter">Close</string>
+    <string name="btnEnvoyer">Send</string>
+    <string name="btnRetour">Back</string>
+    <string name="btnValider">Validate</string>
+    <string name="champName">name</string>
+    <string name="champFirstName">firstname</string>
+
+
 </resources>

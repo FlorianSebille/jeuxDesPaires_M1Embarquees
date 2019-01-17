@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP1-Android FR</string>
+    <string name="btnQuitter">Quitter</string>
+    <string name="btnEnvoyer">Envoyer</string>
+    <string name="btnRetour">Retour</string>
+    <string name="btnValider">Valider</string>
+    <string name="champName">prenom</string>
+    <string name="champFirstName">nom</string>
+</resources>
