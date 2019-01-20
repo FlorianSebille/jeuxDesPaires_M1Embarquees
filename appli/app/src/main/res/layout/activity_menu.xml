@@ -41,10 +41,10 @@
             tools:layout_editor_absoluteY="91dp" />
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relativeLayout"
+        android:layout_width="294dp"
+        android:layout_height="282dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -54,46 +54,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85">
+        app:layout_constraintVertical_bias="0.703">
 
-        <Button
-            android:id="@+id/button"
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:fontFamily="monospace"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="?android:attr/colorEdgeEffect"
+            android:textSize="50sp"
+            android:textStyle="bold|italic"
+            tools:layout_editor_absoluteX="162dp"
+            tools:layout_editor_absoluteY="191dp" />
+
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonCollection"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="22dp"
             android:text="@string/btnPlay"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="264dp" />
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:id="@+id/buttonCollection"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
             android:text="@string/btnCollection"
             tools:layout_editor_absoluteX="148dp"
             tools:layout_editor_absoluteY="356dp" />
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="200dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/titre"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="62dp" />
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </android.support.constraint.ConstraintLayout>

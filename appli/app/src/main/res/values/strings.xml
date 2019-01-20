@@ -5,4 +5,5 @@
     <string name="textSounds">Sounds</string>
     <string name="textMusic">Music</string>
     <string name="textScore">Score</string>
+    <string name="jeux">Play</string>
 </resources>
