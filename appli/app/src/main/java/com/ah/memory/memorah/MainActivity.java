@@ -3,6 +3,7 @@ package com.ah.memory.memorah;
 import android.media.MediaPlayer;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                //transaction.replace(R.id.layoutFragment, new Start());
+                //transaction.commit();
+
                 Intent nextActivity = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(nextActivity);
                 finish();
