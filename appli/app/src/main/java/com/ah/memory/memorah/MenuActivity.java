@@ -30,6 +30,14 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+
+        switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                    MainActivity.startMusic();
+                else  MainActivity.stopMusic();
+            }
+        });
     }
 
 

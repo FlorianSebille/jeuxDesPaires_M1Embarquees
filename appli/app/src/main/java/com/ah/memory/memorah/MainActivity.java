@@ -11,7 +11,7 @@ import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MediaPlayer mediaPlayer; // instance pour la musique
+    private static MediaPlayer mediaPlayer; // instance pour la musique
     private VideoView accueil; // instance pour la video
     private static  int TIME_OUT = 5000; // time to lunch the another activity
 
@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.musicbackground);
-        accueil = findViewById(R.id.accueil);
+        mediaPlayer.setLooping(true);
 
+        accueil = findViewById(R.id.accueil);
         String uriPath = "android.resource://"+getPackageName()+"/"+R.raw.newdenis;
         Uri uri = Uri.parse(uriPath);
         accueil.setVideoURI(uri);
@@ -45,5 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }, TIME_OUT);
+    }
+
+    public static void stopMusic(){
+        mediaPlayer.stop();
+    }
+
+    public static void startMusic(){
+        mediaPlayer.start();
     }
 }
