@@ -32,13 +32,12 @@ public class Start extends Fragment {
                 rootView.findViewById(R.id.easy).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragmentTrasaction(new EasyLevel());
                     }
                 });
                 rootView.findViewById(R.id.hard).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fragmentTrasaction(new HardLevel());
+
                     }
                 });
             }
@@ -47,17 +46,11 @@ public class Start extends Fragment {
         rootView.findViewById(R.id.leaderboard).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fragmentTrasaction(new Leaderboard());
             }
         });
         return rootView;
     }
 
-    private void fragmentTrasaction(Fragment f){
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.layoutFragment, f);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+
 
 }
