@@ -16,4 +16,19 @@
             android:layout_height="150dp"
             android:layout_gravity="center"/>
     </me.crosswall.lib.coverflow.core.LinkagePagerContainer>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="447dp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="170dp"
+        tools:layout_editor_absoluteY="429dp" />
 </android.support.constraint.ConstraintLayout>

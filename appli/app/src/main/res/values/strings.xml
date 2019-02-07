@@ -7,4 +7,5 @@
     <string name="textMusic">Music</string>
     <string name="textScore">Score</string>
     <string name="jeux">Play</string>
+    <string name="instructions">Uncover two matching cards at once\nto eliminate them from the game.\nBeware of the timer, the less the time you take the more you score\nbut make sure to finish before timer runs out.</string>
 </resources>
