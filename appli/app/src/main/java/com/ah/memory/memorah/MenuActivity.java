@@ -1,6 +1,7 @@
 package com.ah.memory.memorah;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ public class MenuActivity extends AppCompatActivity {
 
         this.btnPlay = (Button)this.findViewById(R.id.buttonPlay);
         this.switchMusic = (Switch)this.findViewById(R.id.switch2);
+        this.switchMusic = (Switch)this.findViewById(R.id.switch2);
 
         this.btnPlay.setOnClickListener(new View.OnClickListener() {
 
@@ -33,9 +35,9 @@ public class MenuActivity extends AppCompatActivity {
 
         switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked)
-                    MainActivity.startMusic();
-                else  MainActivity.stopMusic();
+                if(isChecked && !MainActivity.getMediaPlayer().isPlaying())
+                   MainActivity.getMediaPlayer().start();
+                else  if(!isChecked) MainActivity.getMediaPlayer().stop();
             }
         });
     }

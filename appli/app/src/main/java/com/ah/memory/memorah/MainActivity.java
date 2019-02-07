@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.VideoView;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
     private static MediaPlayer mediaPlayer; // instance pour la musique
@@ -22,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.musicbackground);
         mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
         accueil = findViewById(R.id.accueil);
-        String uriPath = "android.resource://"+getPackageName()+"/"+R.raw.newdenis;
+        String uriPath = "android.resource://" + getPackageName() + "/" + R.raw.newdenis;
         Uri uri = Uri.parse(uriPath);
         accueil.setVideoURI(uri);
         accueil.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         accueil.requestFocus();
-        mediaPlayer.start();
+
         accueil.start();
 
         new Handler().postDelayed(new Runnable() {
@@ -48,11 +51,8 @@ public class MainActivity extends AppCompatActivity {
         }, TIME_OUT);
     }
 
-    public static void stopMusic(){
-        mediaPlayer.stop();
+    public static MediaPlayer getMediaPlayer(){
+        return mediaPlayer;
     }
 
-    public static void startMusic(){
-        mediaPlayer.start();
-    }
 }
