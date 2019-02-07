@@ -40,7 +40,7 @@ public class DataDemoView extends LinearLayout{
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 context,
                 android.R.layout.simple_expandable_list_item_1,
-                getData());
+                getData().subList(0,5));
         listview.setAdapter(adapter);
 
         ViewCompat.setNestedScrollingEnabled(listview, true);

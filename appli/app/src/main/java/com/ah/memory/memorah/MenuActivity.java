@@ -25,15 +25,10 @@ public class MenuActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                System.out.println("test swith music ==> " + this.switchMusic.getSplitTrack());
                 Intent intent = new Intent(MenuActivity.this, PlayActivity.class);
                 startActivity(intent);
 
             }
-        });
-
-        this.switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            
         });
     }
 

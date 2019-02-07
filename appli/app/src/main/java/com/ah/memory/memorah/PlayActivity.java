@@ -1,9 +1,12 @@
 package com.ah.memory.memorah;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.LinkagePager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
@@ -27,6 +30,7 @@ public class PlayActivity extends AppCompatActivity{
     private LinkagePager pager;
     private int parallaxHeight;
     private View tab;
+    private FloatingActionButton floatingActionButton;
 
     private static int[] imgs = { R.raw.level1, R.raw.level2, R.raw.level3 };
 
@@ -76,6 +80,16 @@ public class PlayActivity extends AppCompatActivity{
         cover.setLinkagePager(pager);
         pager.setLinkagePager(cover);
 
+        floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+
+        this.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(PlayActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     class MyListPagerAdapter extends PagerAdapter{

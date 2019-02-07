@@ -40,10 +40,6 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                //transaction.replace(R.id.layoutFragment, new Start());
-                //transaction.commit();
-
                 Intent nextActivity = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(nextActivity);
                 finish();
