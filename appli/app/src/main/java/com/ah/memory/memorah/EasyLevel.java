@@ -29,16 +29,7 @@ public class EasyLevel extends Fragment {
 
     private RecyclerView EasyLevelRecyclerView;
     public ArrayList<Integer> cards;
-    public int CARDS[] = {
-                R.drawable.card1,
-                R.drawable.card2,
-                R.drawable.card3,
-                R.drawable.card4,
-                R.drawable.card1,
-                R.drawable.card2,
-                R.drawable.card3,
-                R.drawable.card4
-    };
+    public int CARDS[] = Constants.pickUpRandomCards(4);
     EasyFlipView flippedCard;
     public long RemainingTime;
     public boolean isPaused, isCancelled;

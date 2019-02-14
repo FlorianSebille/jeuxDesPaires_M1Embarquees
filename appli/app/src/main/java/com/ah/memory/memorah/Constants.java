@@ -1,5 +1,7 @@
 package com.ah.memory.memorah;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public final class Constants {
     public static final String PREF_NAME = "HighScore";
     public static final String EASY_HIGH_KEY = "easy_high";
@@ -18,4 +20,115 @@ public final class Constants {
     public static final String PREFS = "user_prefs";
     public static final String PREFS_SOUNDS = "user_prefs_sounds";
     public static final String PREFS_MUSIC = "user_prefs_music";
+    public static final int CARDS[] = {
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8,
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4
+    };
+
+    public static int[] pickUpRandomCards(int number){
+        int[] temp = new int[number];
+        int[] res = new int[number*2];
+
+
+        for(int i = 0; i < number; i++){
+            temp[i]=CARDS[ThreadLocalRandom.current().nextInt(0, 100 + 1)];
+        }
+
+        for(int i= 0; i < number; i++){
+            res[i] = temp[i];
+            res[i+number] = temp[i];
+        }
+
+        return res;
+    }
 }

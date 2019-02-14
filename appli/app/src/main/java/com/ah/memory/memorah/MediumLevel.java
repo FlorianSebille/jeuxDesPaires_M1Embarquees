@@ -29,20 +29,7 @@ public class MediumLevel extends Fragment {
 
     private RecyclerView MediumLevelRecyclerView;
     public ArrayList<Integer> cards;
-    public int CARDS[] = {
-                R.drawable.card1,
-                R.drawable.card2,
-                R.drawable.card3,
-                R.drawable.card4,
-                R.drawable.card5,
-                R.drawable.card6,
-                R.drawable.card1,
-                R.drawable.card2,
-                R.drawable.card3,
-                R.drawable.card4,
-                R.drawable.card5,
-                R.drawable.card6
-    };
+    public int CARDS[] = Constants.pickUpRandomCards(6);
     EasyFlipView flippedCard;
     public long RemainingTime;
     public boolean isPaused, isCancelled;

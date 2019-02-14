@@ -29,24 +29,7 @@ public class HardLevel extends Fragment {
 
     private RecyclerView HardLevelRecyclerView;
     public ArrayList<Integer> cards;
-    public int CARDS[] = {
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8,
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8
-    };
+    public int CARDS[] = Constants.pickUpRandomCards(8);
     EasyFlipView flippedCard;
     private Bundle b;
     public long RemainingTime;
