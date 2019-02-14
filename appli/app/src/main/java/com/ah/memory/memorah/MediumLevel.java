@@ -186,7 +186,7 @@ public class MediumLevel extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             isCancelled = true;
-                            getFragmentManager().popBackStack();
+                            getActivity().finish();
                         }
                     });
                     pause.show();
@@ -239,7 +239,7 @@ public class MediumLevel extends Fragment {
                                                 }
                                                 ((EasyFlipView) child).setOnFlipListener(null);
                                             }
-                                        },200);
+                                        },250);
                                     }
                                 });
                             }
@@ -264,7 +264,7 @@ public class MediumLevel extends Fragment {
                                                     child1.setEnabled(true);
                                                 }
                                             }
-                                        }, 100);
+                                        }, 250);
                                     }
                                 });
                             }

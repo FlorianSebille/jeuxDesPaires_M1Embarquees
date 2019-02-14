@@ -6,7 +6,7 @@
     android:layout_margin="10dp"
     app:flipOnTouch="true"
     app:flipEnabled="true"
-    app:flipDuration="100"
+    app:flipDuration="200"
     android:id="@+id/flippingcard"
     app:flipType="horizontal">
 

@@ -3,11 +3,14 @@ package com.ah.memory.memorah;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +24,11 @@ public class Result extends Fragment {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private int bestEasyScore , bestHardScore;
+
+    private EasyFlipView square1_flip;
+    private EasyFlipView square2_flip;
+    private EasyFlipView square3_flip;
+    private EasyFlipView square4_flip;
 
     public Result() {
         // Required empty public constructor
@@ -40,6 +48,14 @@ public class Result extends Fragment {
         bestHardScore = pref.getInt(Constants.HARD_HIGH_KEY,32);
 
         Bundle b=getArguments();
+
+        square1_flip = rootView.findViewById(R.id.square1_flip);
+        square2_flip = rootView.findViewById(R.id.square2_flip);
+        square3_flip = rootView.findViewById(R.id.square3_flip);
+        square4_flip = rootView.findViewById(R.id.square4_flip);
+
+        //hideEndScreenCard();
+
         if (b.getString("Data").equals("win")){
             konfettiView.build()
                     .addColors(Color.parseColor("#fce18a"), Color.parseColor("#ff726d"), Color.parseColor("#b48def"), Color.parseColor("#f4306d"))
@@ -52,8 +68,6 @@ public class Result extends Fragment {
                     .setPosition(-50f,
                             konfettiView.getWidth() + 500f, -50f, -50f)
                     .stream(400,5000L);
-
-            new SoundPlayer(getContext()).playSound("win.mp3");
 
             if (Integer.valueOf(b.get("level").toString()) == Constants.LEVEL_EASY){
                 if (Integer.valueOf(b.get("Time").toString()) < bestEasyScore){
@@ -68,26 +82,66 @@ public class Result extends Fragment {
                 }
             }
 
-            ((TextView)rootView.findViewById(R.id.r1)).setText("Y");
-            ((TextView)rootView.findViewById(R.id.r2)).setText("A!");
-            ((TextView)rootView.findViewById(R.id.r3)).setText("Y");
-            ((TextView)rootView.findViewById(R.id.r4)).setText("!");
-            ((TextView) rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultWinText1));
-            ((TextView) rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultWinText2));
-            ((TextView) rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime) + b.get("Time").toString());
+            ((TextView)rootView.findViewById(R.id.square1_text)).setText("Y");
+            ((TextView)rootView.findViewById(R.id.square2_text)).setText("A");
+            ((TextView)rootView.findViewById(R.id.square3_text)).setText("Y");
+            ((TextView)rootView.findViewById(R.id.square4_text)).setText("!");
+            animateEndScreen(true);
+            ((TextView)rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultWinText1));
+            ((TextView)rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultWinText2));
+            ((TextView)rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime) + b.get("Time").toString());
         }
         else{
-            new SoundPlayer(getContext()).playSound("lost.mp3");
 
-            ((TextView)rootView.findViewById(R.id.r1)).setText("N");
-            ((TextView)rootView.findViewById(R.id.r2)).setText("O");
-            ((TextView)rootView.findViewById(R.id.r3)).setText("P");
-            ((TextView)rootView.findViewById(R.id.r4)).setText("E");
+
+            ((TextView)rootView.findViewById(R.id.square1_text)).setText("N");
+            ((TextView)rootView.findViewById(R.id.square2_text)).setText("O");
+            ((TextView)rootView.findViewById(R.id.square3_text)).setText("P");
+            ((TextView)rootView.findViewById(R.id.square4_text)).setText("E");
+            animateEndScreen(false);
             ((TextView) rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultLostText1));
             ((TextView) rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultLostText1));
             ((TextView) rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime)+b.get("Time").toString());
         }
+
+
         return rootView;
     }
 
+    private void animateEndScreen(final boolean win){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                square1_flip.flipTheView();
+            }
+        },500);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                square2_flip.flipTheView();
+            }
+        },1000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                square3_flip.flipTheView();
+            }
+        },1500);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                square4_flip.flipTheView();
+                if(win){
+                    new SoundPlayer(getContext()).playSound("win.mp3");
+                }else {
+                    new SoundPlayer(getContext()).playSound("lost.mp3");
+
+                }
+            }
+        },2000);
+
+    }
 }

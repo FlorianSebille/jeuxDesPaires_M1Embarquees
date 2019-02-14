@@ -6,6 +6,7 @@
     <color name="pink">#FB615F</color>
     <color name="yellow">#FDCA33</color>
     <color name="white">#fff</color>
+    <color name="colorWhite">#fafafa</color>
 
     <!-- Light UI colors -->
     <color name="lt_yellow">#fce18a</color>
