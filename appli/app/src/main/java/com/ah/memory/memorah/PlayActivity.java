@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -15,9 +16,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.ah.memory.memorah.view.DataDemoView;
+
+import java.util.ArrayList;
+
 import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.LinkagePagerContainer;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
@@ -31,6 +36,7 @@ public class PlayActivity extends AppCompatActivity{
     private int parallaxHeight;
     private View tab;
     private FloatingActionButton floatingActionButton;
+    private SeekBar seekBar;
 
     private static int[] imgs = { R.raw.level1, R.raw.level2, R.raw.level3 };
 
@@ -40,8 +46,6 @@ public class PlayActivity extends AppCompatActivity{
         setContentView(R.layout.activity_sync_collapsing);
 
         parallaxHeight = getResources().getDimensionPixelSize(R.dimen.cover_pager_height) - getResources().getDimensionPixelSize(R.dimen.tab_height);
-
-        Log.d("###","parallaxHeight:" + parallaxHeight);
 
         customPagerContainer = (LinkagePagerContainer) findViewById(R.id.pager_container);
 
@@ -72,7 +76,7 @@ public class PlayActivity extends AppCompatActivity{
 
         pager = (LinkagePager) findViewById(R.id.pager);
 
-        MyListPagerAdapter adapter = new MyListPagerAdapter();
+        final MyListPagerAdapter adapter = new MyListPagerAdapter();
 
         pager.setOffscreenPageLimit(5);
         pager.setAdapter(adapter);
@@ -86,13 +90,18 @@ public class PlayActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v){
+
+                System.err.println("Current difficulty:" + ((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
                 Intent intent = new Intent(PlayActivity.this, GameActivity.class);
-                startActivity(intent);
+                System.err.println(adapter.getDifficulty());
+                //intent.putExtra("difficulty",seekBar.getProgress());
+                //startActivity(intent);
             }
         });
     }
 
     class MyListPagerAdapter extends PagerAdapter{
+        private DataDemoView view;
 
         @Override
         public int getCount() {
@@ -102,7 +111,7 @@ public class PlayActivity extends AppCompatActivity{
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
 
-            DataDemoView view = new DataDemoView(PlayActivity.this);
+            view = new DataDemoView(PlayActivity.this, position);
             container.addView(view);
             return view;
         }
@@ -117,19 +126,22 @@ public class PlayActivity extends AppCompatActivity{
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
         }
+
+        public int getDifficulty(){ return view.getDifficulty();}
+
     }
 
     private class MyPagerAdapter extends PagerAdapter {
+        private ArrayList<MyListPagerAdapter> listPagerAdapterArrayList;
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             TextView view = new TextView(PlayActivity.this);
-            view.setText("Item "+position);
             view.setGravity(Gravity.CENTER);
             view.setBackgroundResource(imgs[position]);
-            //view.setBackgroundColor(Color.argb(255, position * 50, position * 10, position * 50));
-
+            //listPagerAdapterArrayList.add(ne)
             container.addView(view);
+
             return view;
         }
 
@@ -147,6 +159,7 @@ public class PlayActivity extends AppCompatActivity{
         public boolean isViewFromObject(View view, Object object) {
             return (view == object);
         }
+
     }
 
 

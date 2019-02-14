@@ -6,13 +6,30 @@
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="311dp"></ListView>
+        android:layout_height="311dp">
+    </ListView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/seekBarTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/app_name" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/difficulty" />
 
+    <SeekBar
+        android:id="@+id/seekBarDifficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="2"
+        android:progress="1"
+        android:thumb="@mipmap/denis_icon"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/seekBarDisplayText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/difficultyMedium"/>
 
 </LinearLayout>

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,66 +19,80 @@ import com.ah.memory.memorah.R;
  */
 public class DataDemoView extends LinearLayout{
     private ListView listview;
+    private SeekBar seekBar;
+    private TextView seekBarChosenDifficulty;
 
-    public DataDemoView(Context context) {
+    public DataDemoView(Context context, int position) {
         super(context);
-        initView(context);
+        initView(context, position);
     }
 
-    public DataDemoView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initView(context);
-    }
-
-    public DataDemoView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initView(context);
-    }
-
-    private void initView(Context context) {
+    private void initView(Context context, int position) {
         View view = inflate(context, R.layout.view_list,this);
         listview = (ListView) view.findViewById(R.id.listview);
+        seekBar = (SeekBar) view.findViewById(R.id.seekBarDifficulty);
+        seekBarChosenDifficulty = (TextView) view.findViewById(R.id.seekBarDisplayText);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 context,
                 android.R.layout.simple_expandable_list_item_1,
-                getData().subList(0,5));
+                getData(position).subList(0,5));
         listview.setAdapter(adapter);
 
         ViewCompat.setNestedScrollingEnabled(listview, true);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBarChosenDifficulty.setText(getDifficultyString(progress));
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
     }
 
-    private ArrayList<String> getData()
+    private String getDifficultyString(int difficulty){
+        switch (difficulty){
+            case 0: return getContext().getString(R.string.difficultyEasy);
+            case 2: return getContext().getString(R.string.difficultyHard);
+            default: return getContext().getString(R.string.difficultyMedium);
+        }
+    }
+
+    public int getDifficulty(){
+        return this.seekBar.getProgress();
+    }
+
+    private ArrayList<String> getData(int position)
     {
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-        list.add("hello world");
-        list.add("hello android");
-
+        switch (position){
+            case 0:
+                list.add("1");
+                list.add("1");
+                list.add("1");
+                list.add("1");
+                list.add("1");
+                break;
+            case 1:
+                list.add("2");
+                list.add("2");
+                list.add("2");
+                list.add("2");
+                list.add("2");
+                break;
+            default:
+                list.add("3");
+                list.add("3");
+                list.add("3");
+                list.add("3");
+                list.add("3");
+                break;
+        }
         return list;
     }
 
