@@ -11,6 +11,7 @@ import android.widget.Switch;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private static MediaPlayer mediaPlayer; // instance pour la musique
     private Button btnPlay;
     private Switch switchMusic;
 
@@ -18,6 +19,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_menu);
+
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.musicbackground);
+        mediaPlayer.setLooping(true);
 
         this.btnPlay = (Button)this.findViewById(R.id.buttonPlay);
         this.switchMusic = (Switch)this.findViewById(R.id.switch2);
@@ -36,8 +40,13 @@ public class MenuActivity extends AppCompatActivity {
         switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked && !MainActivity.getMediaPlayer().isPlaying())
-                   MainActivity.getMediaPlayer().start();
-                else  if(!isChecked) MainActivity.getMediaPlayer().stop();
+                    mediaPlayer.start();
+
+                else  if(!isChecked)
+                    if (mediaPlayer.isPlaying())
+                        mediaPlayer.stop();
+                    else MainActivity.getMediaPlayer().stop();
+
             }
         });
     }
