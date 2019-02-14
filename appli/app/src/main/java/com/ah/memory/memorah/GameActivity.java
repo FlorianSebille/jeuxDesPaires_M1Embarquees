@@ -19,12 +19,14 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Intent myIntent = getIntent(); // gets the previously created intent
-        myIntent.getIntExtra("difficulty",difficulty); // will return "FirstKeyValue"
+        difficulty = myIntent.getIntExtra("difficulty",0); // will return "FirstKeyValue"
+
+        System.out.println("Diff :" +  difficulty);
 
         switch (difficulty){
             case 0: fragmentTransaction(new EasyLevel());break;
+            case 1: fragmentTransaction(new MediumLevel());break;
             case 2: fragmentTransaction(new HardLevel());break;
-            default:fragmentTransaction(new HardLevel());break;
         }
 
     }

@@ -53,7 +53,7 @@ public class Result extends Fragment {
                             konfettiView.getWidth() + 500f, -50f, -50f)
                     .stream(400,5000L);
 
-            new SoundPlayer(getContext()).playSound("winner.mp3");
+            new SoundPlayer(getContext()).playSound("win.mp3");
 
             if (Integer.valueOf(b.get("level").toString()) == Constants.LEVEL_EASY){
                 if (Integer.valueOf(b.get("Time").toString()) < bestEasyScore){
@@ -68,22 +68,24 @@ public class Result extends Fragment {
                 }
             }
 
-            ((TextView)rootView.findViewById(R.id.r1)).setText("N");
-            ((TextView)rootView.findViewById(R.id.r2)).setText("I");
-            ((TextView)rootView.findViewById(R.id.r3)).setText("C");
-            ((TextView)rootView.findViewById(R.id.r4)).setText("E");
-            ((TextView) rootView.findViewById(R.id.desc1)).setText("You won!");
-            ((TextView) rootView.findViewById(R.id.desc2)).setText("Nice work, you can always improve your best time");
-            ((TextView) rootView.findViewById(R.id.time)).setText("Your time : "+b.get("Time").toString());
+            ((TextView)rootView.findViewById(R.id.r1)).setText("Y");
+            ((TextView)rootView.findViewById(R.id.r2)).setText("A!");
+            ((TextView)rootView.findViewById(R.id.r3)).setText("Y");
+            ((TextView)rootView.findViewById(R.id.r4)).setText("!");
+            ((TextView) rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultWinText1));
+            ((TextView) rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultWinText2));
+            ((TextView) rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime) + b.get("Time").toString());
         }
         else{
-            ((TextView)rootView.findViewById(R.id.r1)).setText("L");
+            new SoundPlayer(getContext()).playSound("lost.mp3");
+
+            ((TextView)rootView.findViewById(R.id.r1)).setText("N");
             ((TextView)rootView.findViewById(R.id.r2)).setText("O");
-            ((TextView)rootView.findViewById(R.id.r3)).setText("S");
-            ((TextView)rootView.findViewById(R.id.r4)).setText("T");
-            ((TextView) rootView.findViewById(R.id.desc1)).setText("Nice  try, but you lost.");
-            ((TextView) rootView.findViewById(R.id.desc2)).setText("Try improving the score to win");
-            ((TextView) rootView.findViewById(R.id.time)).setText("Your time : "+b.get("Time").toString());
+            ((TextView)rootView.findViewById(R.id.r3)).setText("P");
+            ((TextView)rootView.findViewById(R.id.r4)).setText("E");
+            ((TextView) rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultLostText1));
+            ((TextView) rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultLostText1));
+            ((TextView) rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime)+b.get("Time").toString());
         }
         return rootView;
     }

@@ -12,4 +12,11 @@
     <string name="difficultyMedium">Medium</string>
     <string name="difficultyHard">Hard</string>
     <string name="instructions">Uncover two matching cards at once\nto eliminate them from the game.\nBeware of the timer, the less the time you take the more you score\nbut make sure to finish before timer runs out.</string>
+    <string name="resultWinText1">You won!</string>
+    <string name="resultWinText2">Nice work, you can always improve your best time</string>
+    <string name="resultTime">Your time : </string>
+    <string name="resultLostText1">Nice  try, but you lost.</string>
+    <string name="resultLostText2">Try improving the score to win</string>
+
+
 </resources>

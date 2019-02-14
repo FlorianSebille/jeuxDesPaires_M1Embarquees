@@ -90,12 +90,10 @@ public class PlayActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v){
-
-                System.err.println("Current difficulty:" + ((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
+                System.out.println("VALLLLLLLL : "+((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
                 Intent intent = new Intent(PlayActivity.this, GameActivity.class);
-                System.err.println(adapter.getDifficulty());
-                //intent.putExtra("difficulty",seekBar.getProgress());
-                //startActivity(intent);
+                intent.putExtra("difficulty",((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
+                startActivity(intent);
             }
         });
     }
