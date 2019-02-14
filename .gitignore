@@ -8,5 +8,5 @@
 /build
 /captures
 .externalNativeBuild
-appli/.idea/*
-appli/local.properties
+/appli/.idea/*
+/appli/local.properties
