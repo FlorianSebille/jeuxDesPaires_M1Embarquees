@@ -28,7 +28,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 7
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -36,7 +36,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 15
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -44,7 +44,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 23
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -52,7 +52,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 31
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -60,7 +60,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 39
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -68,7 +68,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 47
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -76,7 +76,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 55
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -84,7 +84,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 63
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -92,7 +92,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 71
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -100,7 +100,7 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 79
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
@@ -108,25 +108,48 @@ public final class Constants {
             R.drawable.card5,
             R.drawable.card6,
             R.drawable.card7,
-            R.drawable.card8,
+            R.drawable.card8, // 87
             R.drawable.card1,
             R.drawable.card2,
             R.drawable.card3,
-            R.drawable.card4
+            R.drawable.card4,
+            R.drawable.card5,
+            R.drawable.card6,
+            R.drawable.card7,
+            R.drawable.card8, // 95
+            R.drawable.card1,
+            R.drawable.card2,
+            R.drawable.card3,
+            R.drawable.card4,
     };
 
+    private static boolean contains(int[] cardsPickedUp, int rand){
+        for(int i = 0; i < cardsPickedUp.length; i++){
+            if(cardsPickedUp[i] == rand){
+                return true;
+            }
+        }
+        return false;
+
+
+    }
+
     public static int[] pickUpRandomCards(int number){
-        int[] temp = new int[number];
-        int[] res = new int[number*2];
+        int[] temp = new int[number / 2];
+        int[] res = new int[number];
+        int randomValue;
 
-
-        for(int i = 0; i < number; i++){
-            temp[i]=CARDS[ThreadLocalRandom.current().nextInt(0, 100 + 1)];
+        for(int i = 0; i < (number / 2); i++){
+            randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 100)];
+            /*while(contains(temp, randomValue)){
+                randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 100)];
+            }*/
+            temp[i]= randomValue;
         }
 
-        for(int i= 0; i < number; i++){
+        for(int i= 0; i < (number / 2); i++){
             res[i] = temp[i];
-            res[i+number] = temp[i];
+            res[i+(number / 2)] = temp[i];
         }
 
         return res;

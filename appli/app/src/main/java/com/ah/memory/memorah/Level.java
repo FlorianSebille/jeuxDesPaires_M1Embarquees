@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ah.memory.memorah.Adapters.EasyLevelAdapter;
+import com.ah.memory.memorah.Adapters.HardLevelAdapter;
 import com.ah.memory.memorah.Adapters.MediumLevelAdapter;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
@@ -25,11 +27,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class MediumLevel extends Fragment {
+public class Level extends Fragment {
 
-    private RecyclerView MediumLevelRecyclerView;
+    private RecyclerView LevelRecyclerView;
     public ArrayList<Integer> cards;
-    public int CARDS[] = Constants.pickUpRandomCards(6);
+    public int CARDS[];
     EasyFlipView flippedCard;
     public long RemainingTime;
     public boolean isPaused, isCancelled;
@@ -37,9 +39,30 @@ public class MediumLevel extends Fragment {
     private SharedPreferences pref;
     int pos, count, bestScore;
 
+    private int levelLayout;
+    private int levelNumber;
+    private String levelKey;
+    private int levelCardNumber;
+    private long levelTimer;
 
-    public MediumLevel() {
+
+    public Level() {
         // Required empty public constructor
+    }
+
+    private void initializeLevel(Bundle bundle){
+        this.levelNumber = bundle.getInt("level_number");
+        this.levelKey = bundle.getString("level_key");
+        this.levelCardNumber = bundle.getInt("level_card_number");
+        this.levelTimer = bundle.getLong("level_timer");
+
+        this.CARDS = Constants.pickUpRandomCards(this.levelCardNumber);
+
+        System.out.println(this.levelNumber);
+        System.out.println(this.levelKey);
+        System.out.println(this.levelCardNumber);
+        System.out.println(this.levelTimer);
+
     }
 
     public void shuffle(int cards[], int n){
@@ -66,45 +89,59 @@ public class MediumLevel extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView =  inflater.inflate(R.layout.fragment_medium_level, container, false);
 
-        MediumLevelRecyclerView = rootView.findViewById(R.id.mediumlevelview);
+        initializeLevel(getArguments());
+
+
+        final View rootView =  inflater.inflate(R.layout.fragment_level, container, false);
+
+        LevelRecyclerView = rootView.findViewById(R.id.levelview);
         b=new Bundle();
-        b.putInt("level",Constants.LEVEL_MEDIUM);
+        b.putInt("level",this.levelNumber);
         pref = getActivity().getSharedPreferences(Constants.PREF_NAME,0);
-        bestScore = pref.getInt(Constants.MEDIUM_HIGH_KEY, (int) (Constants.MEDIUM_TIME/Constants.TIMER_INTERVAL));
+        bestScore = pref.getInt(this.levelKey, (int) (this.levelTimer/Constants.TIMER_INTERVAL));
 
-        ((TextView) rootView.findViewById(R.id.bestMedium)).append(bestScore+"");
+        ((TextView) rootView.findViewById(R.id.best)).append(bestScore+"");
 
         RecyclerView.LayoutManager lm = new GridLayoutManager(getContext(),3, LinearLayoutManager.VERTICAL,false);
-        MediumLevelRecyclerView.setLayoutManager(lm);
+        LevelRecyclerView.setLayoutManager(lm);
 
         cards = new ArrayList<>();
         // TODO: card shuffle here
 
-        shuffle(CARDS,Constants.MEDIUM_NO_OF_CARDS);
-        shuffle(CARDS,Constants.MEDIUM_NO_OF_CARDS);   // double shuffle
+        shuffle(CARDS,this.levelCardNumber);
+        shuffle(CARDS,this.levelCardNumber);   // double shuffle
         for (int card : CARDS){
             cards.add(card);
         }
 
-        MediumLevelRecyclerView.setAdapter(new MediumLevelAdapter(cards));
+        switch (this.levelNumber){
+            case 1:
+                LevelRecyclerView.setAdapter(new EasyLevelAdapter(cards));
+                break;
+            case 2:
+                LevelRecyclerView.setAdapter(new MediumLevelAdapter(cards));
+                break;
+            case 3:
+                LevelRecyclerView.setAdapter(new HardLevelAdapter(cards));
+                break;
+        }
 
         isPaused = false;
         isCancelled = false;
 
-         new CountDownTimer(Constants.MEDIUM_TIME,Constants.TIMER_INTERVAL){
+         new CountDownTimer(this.levelTimer,Constants.TIMER_INTERVAL){
             @Override
             public void onTick(long millisUntilFinished) {
                 if (isPaused || isCancelled){
                     cancel();
                 }
                 else {
-                    ((TextView) rootView.findViewById(R.id.mediumlevelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
+                    ((TextView) rootView.findViewById(R.id.levelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
                     RemainingTime = millisUntilFinished;
-                    if (count == Constants.MEDIUM_NO_OF_CARDS) {
+                    if (count == levelCardNumber) {
                         b.putString("Data", "win");
-                        long time = (Constants.MEDIUM_TIME - millisUntilFinished)/ Constants.TIMER_INTERVAL;
+                        long time = (levelTimer - millisUntilFinished)/ Constants.TIMER_INTERVAL;
                         b.putInt("Time", (int) time);
                         cancel();
                         this.onFinish();
@@ -114,9 +151,9 @@ public class MediumLevel extends Fragment {
 
             @Override
             public void onFinish() {
-                if (count < Constants.MEDIUM_NO_OF_CARDS) {
+                if (count < levelCardNumber) {
                     b.putString("Data", "lost");
-                    b.putInt("Time", (int) (Constants.MEDIUM_TIME/Constants.TIMER_INTERVAL));
+                    b.putInt("Time", (int) (levelTimer/Constants.TIMER_INTERVAL));
                 }
                 fragmentTransaction(b);
             }
@@ -146,11 +183,11 @@ public class MediumLevel extends Fragment {
                                         cancel();
                                     }
                                     else {
-                                        ((TextView) rootView.findViewById(R.id.mediumlevelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
+                                        ((TextView) rootView.findViewById(R.id.levelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
                                         RemainingTime = millisUntilFinished;
-                                        if (count == Constants.MEDIUM_NO_OF_CARDS) {
+                                        if (count == levelCardNumber) {
                                             b.putString("Data", "win");
-                                            time = (int) ((Constants.MEDIUM_TIME - millisUntilFinished)/ Constants.TIMER_INTERVAL);
+                                            time = (int) ((levelTimer - millisUntilFinished)/ Constants.TIMER_INTERVAL);
                                             b.putInt("Time", time);
                                             cancel();
                                             this.onFinish();
@@ -160,9 +197,9 @@ public class MediumLevel extends Fragment {
 
                                 @Override
                                 public void onFinish() {
-                                    if (count < Constants.MEDIUM_NO_OF_CARDS) {
+                                    if (count < levelCardNumber) {
                                         b.putString("Data", "lost");
-                                        b.putInt("Time", (int) (Constants.MEDIUM_TIME/Constants.TIMER_INTERVAL));
+                                        b.putInt("Time", (int) (levelTimer/Constants.TIMER_INTERVAL));
                                     }
                                     fragmentTransaction(b);
                                 }
@@ -183,7 +220,7 @@ public class MediumLevel extends Fragment {
             }
         });
 
-        MediumLevelRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+        LevelRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
 
             @Override
             public boolean onInterceptTouchEvent(final RecyclerView rv, MotionEvent e) {
@@ -206,8 +243,8 @@ public class MediumLevel extends Fragment {
                                 ((EasyFlipView) child).setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
                                     @Override
                                     public void onViewFlipCompleted(EasyFlipView easyFlipView, EasyFlipView.FlipState newCurrentSide) {
-                                        for (int i = 0; i < MediumLevelRecyclerView.getChildCount(); i++) {
-                                            EasyFlipView child1 = (EasyFlipView) MediumLevelRecyclerView.getChildAt(i);
+                                        for (int i = 0; i < LevelRecyclerView.getChildCount(); i++) {
+                                            EasyFlipView child1 = (EasyFlipView) LevelRecyclerView.getChildAt(i);
                                             child1.setEnabled(false);
                                         }
                                         new Handler().postDelayed(new Runnable() {
@@ -220,8 +257,8 @@ public class MediumLevel extends Fragment {
                                                 flippedCard=null;
                                                 count+=2;
 
-                                                for (int i = 0; i < MediumLevelRecyclerView.getChildCount(); i++) {
-                                                    EasyFlipView child1 = (EasyFlipView) MediumLevelRecyclerView.getChildAt(i);
+                                                for (int i = 0; i < LevelRecyclerView.getChildCount(); i++) {
+                                                    EasyFlipView child1 = (EasyFlipView) LevelRecyclerView.getChildAt(i);
                                                     child1.setEnabled(true);
                                                 }
                                                 ((EasyFlipView) child).setOnFlipListener(null);
@@ -234,8 +271,8 @@ public class MediumLevel extends Fragment {
                                 ((EasyFlipView) child).setOnFlipListener(new EasyFlipView.OnFlipAnimationListener() {
                                     @Override
                                     public void onViewFlipCompleted(EasyFlipView easyFlipView, EasyFlipView.FlipState newCurrentSide) {
-                                        for (int i = 0; i < MediumLevelRecyclerView.getChildCount(); i++) {
-                                            EasyFlipView child1 = (EasyFlipView) MediumLevelRecyclerView.getChildAt(i);
+                                        for (int i = 0; i < LevelRecyclerView.getChildCount(); i++) {
+                                            EasyFlipView child1 = (EasyFlipView) LevelRecyclerView.getChildAt(i);
                                             child1.setEnabled(false);
                                         }
                                         new Handler().postDelayed(new Runnable() {
@@ -246,8 +283,8 @@ public class MediumLevel extends Fragment {
                                                 flippedCard = null;
                                                 ((EasyFlipView) child).setOnFlipListener(null);
 
-                                                for (int i = 0; i < MediumLevelRecyclerView.getChildCount(); i++) {
-                                                    EasyFlipView child1 = (EasyFlipView) MediumLevelRecyclerView.getChildAt(i);
+                                                for (int i = 0; i < LevelRecyclerView.getChildCount(); i++) {
+                                                    EasyFlipView child1 = (EasyFlipView) LevelRecyclerView.getChildAt(i);
                                                     child1.setEnabled(true);
                                                 }
                                             }

@@ -18,6 +18,7 @@ public class MenuActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private static MediaPlayer mediaPlayer; // instance pour la musique
     private Button btnPlay;
+    private Button btnCollection;
     private Switch switchMusic;
     private Switch switchSounds;
 
@@ -30,6 +31,7 @@ public class MenuActivity extends AppCompatActivity {
         mediaPlayer.setLooping(true);
 
         this.btnPlay = (Button)this.findViewById(R.id.buttonPlay);
+        this.btnCollection = (Button)this.findViewById(R.id.buttonCollection);
         this.switchMusic = (Switch)this.findViewById(R.id.switch2);
         this.switchSounds = (Switch)this.findViewById(R.id.switch1);
 
@@ -55,6 +57,16 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
+        this.btnPlay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, Leaderboard.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
