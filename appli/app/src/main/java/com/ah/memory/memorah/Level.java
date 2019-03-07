@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -19,9 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.ah.memory.memorah.Adapters.EasyLevelAdapter;
-import com.ah.memory.memorah.Adapters.HardLevelAdapter;
-import com.ah.memory.memorah.Adapters.MediumLevelAdapter;
+import com.ah.memory.memorah.Adapters.LevelAdapter;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.ArrayList;
@@ -120,18 +119,7 @@ public class Level extends Fragment {
         for (int card : CARDS){
             cards.add(card);
         }
-
-        switch (this.levelNumber){
-            case 1:
-                LevelRecyclerView.setAdapter(new EasyLevelAdapter(cards));
-                break;
-            case 2:
-                LevelRecyclerView.setAdapter(new MediumLevelAdapter(cards));
-                break;
-            case 3:
-                LevelRecyclerView.setAdapter(new HardLevelAdapter(cards));
-                break;
-        }
+        LevelRecyclerView.setAdapter(new LevelAdapter(cards));
 
         isPaused = false;
         isCancelled = false;
@@ -146,14 +134,14 @@ public class Level extends Fragment {
                     ((TextView) rootView.findViewById(R.id.levelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
                     RemainingTime = millisUntilFinished;
                     if (count == levelCardNumber) {
+                        System.out.println("CEWIN");
                         b.putString("Data", "win");
                         long time = (levelTimer - millisUntilFinished)/ Constants.TIMER_INTERVAL;
                         b.putInt("Time", (int) time);
-                        cancel();
-                        this.onFinish();
 
-                        /* SAUVEGARDE DES CARTES*/
-                        pref = getApplicationContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
+
+                        /* SAUVEGARDE DES CARTES */
+                        pref = getContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
 
                         if (pref.contains(Constants.PREFS_COLLECTION_LEN_PREFIX)) {
                             List<Integer> recup = new ArrayList<Integer>();
@@ -171,27 +159,28 @@ public class Level extends Fragment {
 
 
                         } else {
-                            savePreferences(cards);
+                            Set<Integer> cardsUnique = new HashSet<>(cards);
+                            savePreferences(new ArrayList<>(cardsUnique));
                         }
+
+                        cancel();
+                        this.onFinish();
                     }
                 }
             }
 
             public void savePreferences(List<Integer> list){
 
+                System.out.println("SAVE"+ list);
+
                 int count = pref.getInt(Constants.PREFS_COLLECTION_LEN_PREFIX,0);
 
-                pref.edit().putInt(Constants.PREFS_COLLECTION_LEN_PREFIX, list.size());
-
-                int index = count;
-
                 for(int uneCarte : list) {
-                    pref.edit().putInt(Constants.PREFS_COLLECTION_VAL_PREFIX + index, uneCarte);
-                    index++;
+                    pref.edit().putInt(Constants.PREFS_COLLECTION_VAL_PREFIX + count, uneCarte).apply();
+                    count++;
                 }
 
-                pref.edit().putInt(Constants.PREFS_COLLECTION_LEN_PREFIX, index);
-                pref.edit().commit();
+                pref.edit().putInt(Constants.PREFS_COLLECTION_LEN_PREFIX, count).apply();
             }
 
             @Override
