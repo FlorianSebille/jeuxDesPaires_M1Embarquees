@@ -57,7 +57,7 @@ public class MenuActivity extends AppCompatActivity {
 
             }
         });
-        this.btnPlay.setOnClickListener(new View.OnClickListener() {
+        this.btnCollection.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
