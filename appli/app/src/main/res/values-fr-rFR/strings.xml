@@ -11,4 +11,5 @@
     <string name="difficultyEasy">Facile</string>
     <string name="difficultyMedium">Moyen</string>
     <string name="difficultyHard">Difficile</string>
+    <string name="collection">Collection</string>
 </resources>

@@ -17,6 +17,7 @@
     <string name="resultTime">Your time : </string>
     <string name="resultLostText1">Nice  try, but you lost.</string>
     <string name="resultLostText2">Try improving the score to win</string>
+    <string name="collection">Collection</string>
 
 
 </resources>

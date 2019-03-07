@@ -58,6 +58,16 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        this.btnCollection.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MenuActivity.this, CollectionActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         switchMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)

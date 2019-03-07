@@ -11,24 +11,24 @@ import com.ah.memory.memorah.R;
 
 import java.util.ArrayList;
 
-public class EasyLevelAdapter extends RecyclerView.Adapter<EasyLevelAdapter.ViewHolder> {
+public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.ViewHolder> {
 
     private ArrayList<Integer> cardFront;
 
-    public EasyLevelAdapter(ArrayList<Integer> cardFront) {
+    public CollectionAdapter(ArrayList<Integer> cardFront) {
         this.cardFront = cardFront;
     }
 
     @Override
-    public EasyLevelAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card,parent,false);
+    public CollectionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_collection,parent,false);
         view.setMinimumWidth(parent.getMeasuredWidth() / 3);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.cardFr.setImageResource(cardFront.get(position));
+        holder.cardFront.setImageResource(cardFront.get(position));
     }
 
     @Override
@@ -38,11 +38,11 @@ public class EasyLevelAdapter extends RecyclerView.Adapter<EasyLevelAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView cardFr;
+        private ImageView cardFront;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            cardFr = itemView.findViewById(R.id.cardfront);
+            cardFront = itemView.findViewById(R.id.cardfront);
         }
     }
 }
