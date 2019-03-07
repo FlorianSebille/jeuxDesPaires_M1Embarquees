@@ -22,6 +22,12 @@ public final class Constants {
     public static final String PREFS_SOUNDS = "user_prefs_sounds";
     public static final String PREFS_MUSIC = "user_prefs_music";
 
+    public static final String PREFS_HIGHSCORE_1 = "user_prefs_Highscore _1_";
+    public static final String PREFS_HIGHSCORE_2 = "user_prefs_Highscore _2_";
+    public static final String PREFS_HIGHSCORE_3 = "user_prefs_Highscore _3_";
+    public static final String PREFS_HIGHSCORE_4 = "user_prefs_Highscore _4_";
+    public static final String PREFS_HIGHSCORE_5 = "user_prefs_Highscore _5_";
+
     public static final String PREFS_COLLECTION_LEN_PREFIX = "user_prefs_cards_size_";
     public static final String PREFS_COLLECTION_VAL_PREFIX = "user_prefs_card_";
 

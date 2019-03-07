@@ -351,4 +351,34 @@ public class Level extends Fragment {
         return rootView;
     }
 
+    public void changeScoreandSave(int score){
+        int score1 = pref.getInt(Constants.PREFS_HIGHSCORE_1+levelKey+"_"+levelNumber,0);
+        int score2 = pref.getInt(Constants.PREFS_HIGHSCORE_2+levelKey+"_"+levelNumber,0);;
+        int score3 = pref.getInt(Constants.PREFS_HIGHSCORE_3+levelKey+"_"+levelNumber,0);;
+        int score4 = pref.getInt(Constants.PREFS_HIGHSCORE_4+levelKey+"_"+levelNumber,0);;
+        int score5 = pref.getInt(Constants.PREFS_HIGHSCORE_5+levelKey+"_"+levelNumber,0);;
+
+        if(score > score1)
+            score1 = score;
+
+        else if(score > score2)
+            score2 = score;
+
+        else if(score > score3)
+            score3 = score;
+
+        else if(score > score4)
+            score4 = score;
+
+        else if(score > score5)
+            score5 = score;
+
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_1+levelKey+"_"+levelNumber, score1);
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_2+levelKey+"_"+levelNumber, score2);
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_3+levelKey+"_"+levelNumber, score3);
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_4+levelKey+"_"+levelNumber, score4);
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_5+levelKey+"_"+levelNumber, score5);
+        pref.edit().commit();
+    }
+
 }
