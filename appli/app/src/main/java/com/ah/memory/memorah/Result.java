@@ -90,6 +90,8 @@ public class Result extends Fragment {
             ((TextView)rootView.findViewById(R.id.desc1)).setText(getString(R.string.resultWinText1));
             ((TextView)rootView.findViewById(R.id.desc2)).setText(getString(R.string.resultWinText2));
             ((TextView)rootView.findViewById(R.id.time)).setText(getString(R.string.resultTime) + b.get("Time").toString());
+
+
         }
         else{
 

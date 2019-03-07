@@ -17,9 +17,14 @@ public final class Constants {
     public static final long MEDIUM_TIME = 27000;
     public static final long HARD_TIME = 32000;
     public static final int TIMER_INTERVAL = 1000;
+
     public static final String PREFS = "user_prefs";
     public static final String PREFS_SOUNDS = "user_prefs_sounds";
     public static final String PREFS_MUSIC = "user_prefs_music";
+
+    public static final String PREFS_COLLECTION_LEN_PREFIX = "user_prefs_cards_size_";
+    public static final String PREFS_COLLECTION_VAL_PREFIX = "user_prefs_card_";
+
     public static final int CARDS[] = {
             R.drawable.card1,
             R.drawable.card2,

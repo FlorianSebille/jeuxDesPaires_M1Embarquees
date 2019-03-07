@@ -1,6 +1,7 @@
 package com.ah.memory.memorah;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +25,10 @@ import com.ah.memory.memorah.Adapters.MediumLevelAdapter;
 import com.wajahatkarim3.easyflipview.EasyFlipView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 
 public class Level extends Fragment {
@@ -36,6 +40,7 @@ public class Level extends Fragment {
     public long RemainingTime;
     public boolean isPaused, isCancelled;
     Bundle b;
+
     private SharedPreferences pref;
     int pos, count, bestScore;
 
@@ -80,6 +85,7 @@ public class Level extends Fragment {
     public void fragmentTransaction(Bundle b){
         final FragmentTransaction transaction = getFragmentManager().beginTransaction();
         final Result r= new Result();
+
         r.setArguments(b);
         transaction.replace(R.id.layoutFragment, r);
         transaction.commit();
@@ -145,8 +151,47 @@ public class Level extends Fragment {
                         b.putInt("Time", (int) time);
                         cancel();
                         this.onFinish();
+
+                        /* SAUVEGARDE DES CARTES*/
+                        pref = getApplicationContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
+
+                        if (pref.contains(Constants.PREFS_COLLECTION_LEN_PREFIX)) {
+                            List<Integer> recup = new ArrayList<Integer>();
+
+                            int count = pref.getInt(Constants.PREFS_COLLECTION_LEN_PREFIX,0);
+
+                            for(int i = 0; i < count; i++)
+                                recup.add(pref.getInt(Constants.PREFS_COLLECTION_VAL_PREFIX+i, i));
+
+                            for(int uneCarte : cards)
+                                if(!recup.contains(uneCarte))
+                                    recup.add(uneCarte);
+
+                            savePreferences(recup);
+
+
+                        } else {
+                            savePreferences(cards);
+                        }
                     }
                 }
+            }
+
+            public void savePreferences(List<Integer> list){
+
+                int count = pref.getInt(Constants.PREFS_COLLECTION_LEN_PREFIX,0);
+
+                pref.edit().putInt(Constants.PREFS_COLLECTION_LEN_PREFIX, list.size());
+
+                int index = count;
+
+                for(int uneCarte : list) {
+                    pref.edit().putInt(Constants.PREFS_COLLECTION_VAL_PREFIX + index, uneCarte);
+                    index++;
+                }
+
+                pref.edit().putInt(Constants.PREFS_COLLECTION_LEN_PREFIX, index);
+                pref.edit().commit();
             }
 
             @Override
