@@ -64,12 +64,6 @@ public class Level extends Fragment {
 
         this.CARDS = Constants.pickUpRandomCards(this.levelCardNumber);
 
-        System.out.println(this.levelNumber);
-        System.out.println(this.levelKey);
-        System.out.println(this.levelCardNumber);
-        System.out.println(this.levelTimer);
-        System.out.println(this.worldNumber);
-
     }
 
     public void shuffle(int cards[], int n){
@@ -137,7 +131,6 @@ public class Level extends Fragment {
                     ((TextView) rootView.findViewById(R.id.levelcounter)).setText("Time : " + millisUntilFinished / Constants.TIMER_INTERVAL);
                     RemainingTime = millisUntilFinished;
                     if (count == levelCardNumber) {
-                        System.out.println("CEWIN");
                         b.putString("Data", "win");
                         long time = (levelTimer - millisUntilFinished)/ Constants.TIMER_INTERVAL;
                         b.putInt("Time", (int) time);
@@ -177,8 +170,6 @@ public class Level extends Fragment {
             }
 
             public void savePreferences(List<Integer> list){
-
-                System.out.println("SAVE"+ list);
 
                 int count = pref.getInt(Constants.PREFS_COLLECTION_LEN_PREFIX,0);
 

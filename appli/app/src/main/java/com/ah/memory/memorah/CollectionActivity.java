@@ -37,7 +37,6 @@ public class CollectionActivity extends AppCompatActivity {
         if (pref.contains(Constants.PREFS_COLLECTION_LEN_PREFIX)) {
             int count = pref.getInt(Constants.PREFS_COLLECTION_LEN_PREFIX, 0);
 
-            System.out.println("TOTAL" + count);
             for (int i = 0; i < count; i++)
                 cards.add(pref.getInt(Constants.PREFS_COLLECTION_VAL_PREFIX + i, i));
         }

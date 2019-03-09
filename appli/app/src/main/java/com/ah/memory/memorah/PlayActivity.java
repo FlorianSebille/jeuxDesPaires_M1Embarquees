@@ -91,8 +91,7 @@ public class PlayActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v){
-                //world = ;
-                System.out.println("VALLLLLLLL : "+((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
+                world = pager.getCurrentItem();
                 Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                 intent.putExtra("difficulty",((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
                 intent.putExtra("world", world);
