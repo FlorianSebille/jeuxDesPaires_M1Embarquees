@@ -1,6 +1,7 @@
 package com.ah.memory.memorah.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import com.ah.memory.memorah.Constants;
 import com.ah.memory.memorah.R;
 
 /**
@@ -22,12 +24,12 @@ public class DataDemoView extends LinearLayout{
     private SeekBar seekBar;
     private TextView seekBarChosenDifficulty;
 
-    public DataDemoView(Context context, int position) {
+    public DataDemoView(Context context, int position, int[] scores) {
         super(context);
-        initView(context, position);
+        initView(context, position, scores);
     }
 
-    private void initView(Context context, int position) {
+    private void initView(Context context, int position, int[] scores) {
         View view = inflate(context, R.layout.view_list,this);
         listview = (ListView) view.findViewById(R.id.listview);
         seekBar = (SeekBar) view.findViewById(R.id.seekBarDifficulty);
@@ -36,7 +38,7 @@ public class DataDemoView extends LinearLayout{
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 context,
                 android.R.layout.simple_expandable_list_item_1,
-                getData(position).subList(0,5));
+                getData(position, scores).subList(0,5));
         listview.setAdapter(adapter);
 
         ViewCompat.setNestedScrollingEnabled(listview, true);
@@ -66,33 +68,31 @@ public class DataDemoView extends LinearLayout{
         return this.seekBar.getProgress();
     }
 
-    private ArrayList<String> getData(int position)
+    private ArrayList<String> getData(int position, int[] scores)
     {
 
         ArrayList<String> list = new ArrayList<>();
-        switch (position){
-            case 0:
-                list.add("1");
-                list.add("1");
-                list.add("1");
-                list.add("1");
-                list.add("1");
-                break;
-            case 1:
-                list.add("2");
-                list.add("2");
-                list.add("2");
-                list.add("2");
-                list.add("2");
-                break;
-            default:
-                list.add("3");
-                list.add("3");
-                list.add("3");
-                list.add("3");
-                list.add("3");
-                break;
-        }
+
+        if(scores[0] == 0)
+            list.add("1)");
+        else list.add("1)    " + scores[0]);
+
+        if(scores[1] == 0)
+            list.add("2)");
+        else list.add("2)    " + scores[1]);
+
+        if(scores[2] == 0)
+            list.add("3)");
+        else list.add("3)    " + scores[2]);
+
+        if(scores[3] == 0)
+            list.add("4)");
+        else list.add("4)    " + scores[3]);
+
+        if(scores[4] == 0)
+            list.add("5)");
+        else list.add("5)    " + scores[4]);
+
         return list;
     }
 

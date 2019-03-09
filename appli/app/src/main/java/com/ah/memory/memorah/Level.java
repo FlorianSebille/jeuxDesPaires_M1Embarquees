@@ -339,15 +339,14 @@ public class Level extends Fragment {
     }
 
     public void changeScoreandSave(int score){
-        int tempMax = (int)(levelTimer/Constants.TIMER_INTERVAL);
 
-        int score1 = pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,tempMax);
-        int score2 = pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,tempMax);
-        int score3 = pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,tempMax);
-        int score4 = pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,tempMax);
-        int score5 = pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,tempMax);
+        int score1 = pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,0);
+        int score2 = pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,0);
+        int score3 = pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,0);
+        int score4 = pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,0);
+        int score5 = pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,0);
 
-        if(score < score1) {
+        if(score < score1 || score1 == 0) {
             score5 = score4;
             score4 = score3;
             score3 = score2;
@@ -356,25 +355,25 @@ public class Level extends Fragment {
 
         }
 
-        else if(score < score2) {
+        else if(score < score2 || score2 == 0) {
             score5 = score4;
             score4 = score3;
             score3 = score2;
             score2 = score;
         }
 
-        else if(score < score3) {
+        else if(score < score3 || score3 == 0) {
             score5 = score4;
             score4 = score3;
             score3 = score;
         }
 
-        else if(score < score4) {
+        else if(score < score4 || score4 == 0) {
             score5 = score4;
             score4 = score;
         }
 
-        else if(score < score5)
+        else if(score < score5 || score5 == 0)
             score5 = score;
 
         pref.edit().putInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber, score1).apply();
@@ -383,16 +382,16 @@ public class Level extends Fragment {
         pref.edit().putInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber, score4).apply();
         pref.edit().putInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber, score5).apply();
 
-        System.out.println("##################");
-        System.out.println("#      TEST      #");
-        System.out.println("#levelKey    => " + levelKey + "#");
-        System.out.println("#levelNumber => " +levelNumber + "#");
-        System.out.println("#  score1 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,0) + "  #");
-        System.out.println("#  score2 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,0) + "  #");
-        System.out.println("#  score3 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,0) + "  #");
-        System.out.println("#  score4 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,0) + "  #");
-        System.out.println("#  score5 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,0) + "  #");
-        System.out.println("##################");
+        //System.out.println("##################");
+        //System.out.println("#      TEST      #");
+        //System.out.println("#worldNumber => " + worldNumber + "#");
+        //System.out.println("#levelNumber => " +levelNumber + "#");
+        //System.out.println("#  score1 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,0) + "  #");
+        //System.out.println("#  score2 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,0) + "  #");
+        //System.out.println("#  score3 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,0) + "  #");
+        //System.out.println("#  score4 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,0) + "  #");
+        //System.out.println("#  score5 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,0) + "  #");
+        //System.out.println("##################");
     }
 
 }
