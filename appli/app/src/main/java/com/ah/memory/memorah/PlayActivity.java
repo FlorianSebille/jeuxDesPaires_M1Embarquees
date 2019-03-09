@@ -34,6 +34,7 @@ public class PlayActivity extends AppCompatActivity{
     private LinkagePagerContainer customPagerContainer;
     private LinkagePager pager;
     private int parallaxHeight;
+    private int world;
     private View tab;
     private FloatingActionButton floatingActionButton;
     private SeekBar seekBar;
@@ -62,7 +63,7 @@ public class PlayActivity extends AppCompatActivity{
 
         customPagerContainer.setOverlapEnabled(true);
 
-        PagerAdapter coverAdapter = new MyPagerAdapter();
+        final MyPagerAdapter coverAdapter = new MyPagerAdapter();
         cover.setAdapter(coverAdapter);
         cover.setOffscreenPageLimit(5);
 
@@ -90,9 +91,11 @@ public class PlayActivity extends AppCompatActivity{
 
             @Override
             public void onClick(View v){
+                //world = ;
                 System.out.println("VALLLLLLLL : "+((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
                 Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                 intent.putExtra("difficulty",((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
+                intent.putExtra("world", world);
                 startActivity(intent);
             }
         });
@@ -139,7 +142,6 @@ public class PlayActivity extends AppCompatActivity{
             view.setBackgroundResource(imgs[position]);
             //listPagerAdapterArrayList.add(ne)
             container.addView(view);
-
             return view;
         }
 

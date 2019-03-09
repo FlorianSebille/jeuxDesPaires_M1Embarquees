@@ -7,9 +7,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+public class   GameActivity extends AppCompatActivity {
 
     private int difficulty;
+    private int world;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +21,12 @@ public class GameActivity extends AppCompatActivity {
 
         Intent myIntent = getIntent(); // gets the previously created intent
         difficulty = myIntent.getIntExtra("difficulty",0); // will return "FirstKeyValue"
+        world = myIntent.getIntExtra("world",0); // will return "FirstKeyValue"
 
-        System.out.println("Diff :" +  difficulty);
+        System.out.println("Difficul :" +  difficulty);
+        System.out.println("world :" +  world);
+
+        bundle.putInt("world_number",world);
 
         switch (difficulty){
             case 0:

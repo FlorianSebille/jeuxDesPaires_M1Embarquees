@@ -48,6 +48,7 @@ public class Level extends Fragment {
     private String levelKey;
     private int levelCardNumber;
     private long levelTimer;
+    private int worldNumber;
 
 
     public Level() {
@@ -59,6 +60,7 @@ public class Level extends Fragment {
         this.levelKey = bundle.getString("level_key");
         this.levelCardNumber = bundle.getInt("level_card_number");
         this.levelTimer = bundle.getLong("level_timer");
+        this.worldNumber = bundle.getInt("world_number");
 
         this.CARDS = Constants.pickUpRandomCards(this.levelCardNumber);
 
@@ -66,6 +68,7 @@ public class Level extends Fragment {
         System.out.println(this.levelKey);
         System.out.println(this.levelCardNumber);
         System.out.println(this.levelTimer);
+        System.out.println(this.worldNumber);
 
     }
 
@@ -162,6 +165,10 @@ public class Level extends Fragment {
                             Set<Integer> cardsUnique = new HashSet<>(cards);
                             savePreferences(new ArrayList<>(cardsUnique));
                         }
+
+
+                        /*SAUVEGARDE DES SCORES*/
+                        changeScoreandSave((int)time);
 
                         cancel();
                         this.onFinish();
@@ -341,33 +348,60 @@ public class Level extends Fragment {
     }
 
     public void changeScoreandSave(int score){
-        int score1 = pref.getInt(Constants.PREFS_HIGHSCORE_1+levelKey+"_"+levelNumber,0);
-        int score2 = pref.getInt(Constants.PREFS_HIGHSCORE_2+levelKey+"_"+levelNumber,0);;
-        int score3 = pref.getInt(Constants.PREFS_HIGHSCORE_3+levelKey+"_"+levelNumber,0);;
-        int score4 = pref.getInt(Constants.PREFS_HIGHSCORE_4+levelKey+"_"+levelNumber,0);;
-        int score5 = pref.getInt(Constants.PREFS_HIGHSCORE_5+levelKey+"_"+levelNumber,0);;
+        int tempMax = (int)(levelTimer/Constants.TIMER_INTERVAL);
 
-        if(score > score1)
+        int score1 = pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,tempMax);
+        int score2 = pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,tempMax);
+        int score3 = pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,tempMax);
+        int score4 = pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,tempMax);
+        int score5 = pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,tempMax);
+
+        if(score < score1) {
+            score5 = score4;
+            score4 = score3;
+            score3 = score2;
+            score2 = score1;
             score1 = score;
 
-        else if(score > score2)
+        }
+
+        else if(score < score2) {
+            score5 = score4;
+            score4 = score3;
+            score3 = score2;
             score2 = score;
+        }
 
-        else if(score > score3)
+        else if(score < score3) {
+            score5 = score4;
+            score4 = score3;
             score3 = score;
+        }
 
-        else if(score > score4)
+        else if(score < score4) {
+            score5 = score4;
             score4 = score;
+        }
 
-        else if(score > score5)
+        else if(score < score5)
             score5 = score;
 
-        pref.edit().putInt(Constants.PREFS_HIGHSCORE_1+levelKey+"_"+levelNumber, score1);
-        pref.edit().putInt(Constants.PREFS_HIGHSCORE_2+levelKey+"_"+levelNumber, score2);
-        pref.edit().putInt(Constants.PREFS_HIGHSCORE_3+levelKey+"_"+levelNumber, score3);
-        pref.edit().putInt(Constants.PREFS_HIGHSCORE_4+levelKey+"_"+levelNumber, score4);
-        pref.edit().putInt(Constants.PREFS_HIGHSCORE_5+levelKey+"_"+levelNumber, score5);
-        pref.edit().commit();
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber, score1).apply();
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber, score2).apply();
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber, score3).apply();
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber, score4).apply();
+        pref.edit().putInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber, score5).apply();
+
+        System.out.println("##################");
+        System.out.println("#      TEST      #");
+        System.out.println("#levelKey    => " + levelKey + "#");
+        System.out.println("#levelNumber => " +levelNumber + "#");
+        System.out.println("#  score1 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,0) + "  #");
+        System.out.println("#  score2 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,0) + "  #");
+        System.out.println("#  score3 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,0) + "  #");
+        System.out.println("#  score4 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,0) + "  #");
+        System.out.println("#  score5 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,0) + "  #");
+        System.out.println("##################");
     }
 
 }
