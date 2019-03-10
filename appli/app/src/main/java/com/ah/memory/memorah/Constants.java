@@ -14,8 +14,8 @@ public final class Constants {
     public static final int MEDIUM_NO_OF_CARDS = 12;
     public static final int EASY_NO_OF_CARDS = 8;
     public static final long EASY_TIME = 22000;
-    public static final long MEDIUM_TIME = 27000;
-    public static final long HARD_TIME = 32000;
+    public static final long MEDIUM_TIME = 35000;
+    public static final long HARD_TIME = 50000;
     public static final int TIMER_INTERVAL = 1000;
 
     public static final String PREFS = "user_prefs";

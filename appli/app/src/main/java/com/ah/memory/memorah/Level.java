@@ -382,16 +382,6 @@ public class Level extends Fragment {
         pref.edit().putInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber, score4).apply();
         pref.edit().putInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber, score5).apply();
 
-        //System.out.println("##################");
-        //System.out.println("#      TEST      #");
-        //System.out.println("#worldNumber => " + worldNumber + "#");
-        //System.out.println("#levelNumber => " +levelNumber + "#");
-        //System.out.println("#  score1 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_1+worldNumber+"_"+levelNumber,0) + "  #");
-        //System.out.println("#  score2 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_2+worldNumber+"_"+levelNumber,0) + "  #");
-        //System.out.println("#  score3 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_3+worldNumber+"_"+levelNumber,0) + "  #");
-        //System.out.println("#  score4 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_4+worldNumber+"_"+levelNumber,0) + "  #");
-        //System.out.println("#  score5 => " +  pref.getInt(Constants.PREFS_HIGHSCORE_5+worldNumber+"_"+levelNumber,0) + "  #");
-        //System.out.println("##################");
     }
 
 }

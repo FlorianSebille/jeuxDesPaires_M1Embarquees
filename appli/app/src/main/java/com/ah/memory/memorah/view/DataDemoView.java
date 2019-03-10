@@ -24,12 +24,16 @@ public class DataDemoView extends LinearLayout{
     private SeekBar seekBar;
     private TextView seekBarChosenDifficulty;
 
-    public DataDemoView(Context context, int position, int[] scores) {
+    public DataDemoView(Context context, int position) {
         super(context);
-        initView(context, position, scores);
+        initView(context, position);
     }
 
-    private void initView(Context context, int position, int[] scores) {
+    private void initView(Context context, int position) {
+
+        final int posi = position;
+        final Context cont = context;
+
         View view = inflate(context, R.layout.view_list,this);
         listview = (ListView) view.findViewById(R.id.listview);
         seekBar = (SeekBar) view.findViewById(R.id.seekBarDifficulty);
@@ -38,7 +42,7 @@ public class DataDemoView extends LinearLayout{
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 context,
                 android.R.layout.simple_expandable_list_item_1,
-                getData(position, scores).subList(0,5));
+                getData(position, getScores(posi, 1)).subList(0,5));
         listview.setAdapter(adapter);
 
         ViewCompat.setNestedScrollingEnabled(listview, true);
@@ -46,6 +50,13 @@ public class DataDemoView extends LinearLayout{
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                        cont,
+                        android.R.layout.simple_expandable_list_item_1,
+                        getData(posi, getScores(posi, progress)).subList(0,5));
+                listview.setAdapter(adapter);
+
                 seekBarChosenDifficulty.setText(getDifficultyString(progress));
             }
             @Override
@@ -94,6 +105,19 @@ public class DataDemoView extends LinearLayout{
         else list.add("5)    " + scores[4]);
 
         return list;
+    }
+
+    public int[] getScores(int position, int dificulty){
+        int[] scores = new int[5];
+        SharedPreferences sharedPref = getContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
+
+        scores[0] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_1+position+"_"+dificulty,0);
+        scores[1] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_2+position+"_"+dificulty,0);
+        scores[2] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_3+position+"_"+dificulty,0);
+        scores[3] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_4+position+"_"+dificulty,0);
+        scores[4] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_5+position+"_"+dificulty,0);
+
+        return scores;
     }
 
 

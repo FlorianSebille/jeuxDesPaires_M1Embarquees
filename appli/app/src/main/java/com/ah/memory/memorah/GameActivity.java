@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-public class   GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private int difficulty;
     private int world;
@@ -56,8 +56,12 @@ public class   GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
+        Intent intent = new Intent(GameActivity.this,PlayActivity.class);
+        startActivity(intent);
         finish();
     }
+
 
     private void fragmentTransaction(Fragment f){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

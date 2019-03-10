@@ -112,21 +112,8 @@ public class PlayActivity extends AppCompatActivity{
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            view = new DataDemoView(PlayActivity.this, position);
 
-            int[] scores = new int[5];
-            SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
-
-            //LinkagePager pager = (LinkagePager) findViewById(R.id.pager);
-
-            int dificulty = 0;
-
-            scores[0] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_1+position+"_"+dificulty,0);
-            scores[1] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_2+position+"_"+dificulty,0);
-            scores[2] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_3+position+"_"+dificulty,0);
-            scores[3] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_4+position+"_"+dificulty,0);
-            scores[4] = sharedPref.getInt(Constants.PREFS_HIGHSCORE_5+position+"_"+dificulty,0);
-
-            view = new DataDemoView(PlayActivity.this, position, scores);
             container.addView(view);
             return view;
         }
