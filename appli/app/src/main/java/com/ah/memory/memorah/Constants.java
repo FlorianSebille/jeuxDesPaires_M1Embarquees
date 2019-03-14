@@ -89,49 +89,7 @@ public final class Constants {
             R.drawable.card55,
             R.drawable.card56, // 55
             R.drawable.card57,
-            R.drawable.card58,
-            R.drawable.card59,
-            R.drawable.card60,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8, // 63
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8, // 71
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8, // 79
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8, // 87
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
-            R.drawable.card5,
-            R.drawable.card6,
-            R.drawable.card7,
-            R.drawable.card8, // 95
-            R.drawable.card1,
-            R.drawable.card2,
-            R.drawable.card3,
-            R.drawable.card4,
+            R.drawable.card58
     };
 
     private static boolean contains(int[] cardsPickedUp, int rand){
@@ -151,10 +109,10 @@ public final class Constants {
         int randomValue;
 
         for(int i = 0; i < (number / 2); i++){
-            randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 100)];
-            /*while(contains(temp, randomValue)){
-                randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 100)];
-            }*/
+            randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 58)];
+            while(contains(temp, randomValue)){
+                randomValue = CARDS[ThreadLocalRandom.current().nextInt(0, 58)];
+            }
             temp[i]= randomValue;
         }
 

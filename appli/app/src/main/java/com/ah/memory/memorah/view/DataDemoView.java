@@ -3,7 +3,6 @@ package com.ah.memory.memorah.view;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.view.ViewCompat;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
@@ -16,9 +15,6 @@ import java.util.ArrayList;
 import com.ah.memory.memorah.Constants;
 import com.ah.memory.memorah.R;
 
-/**
- * Created by yuweichen on 16/5/3.
- */
 public class DataDemoView extends LinearLayout{
     private ListView listview;
     private SeekBar seekBar;

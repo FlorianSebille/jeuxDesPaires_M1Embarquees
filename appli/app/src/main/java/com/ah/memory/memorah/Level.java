@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -138,6 +137,9 @@ public class Level extends Fragment {
 
                         /* SAUVEGARDE DES CARTES */
                         pref = getContext().getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE);
+                        Set<Integer> setUnique = new HashSet<>(cards);
+                        List<Integer> cardsUnique = new ArrayList<>(setUnique);
+                        List<Integer> toSave = new ArrayList<>();
 
                         if (pref.contains(Constants.PREFS_COLLECTION_LEN_PREFIX)) {
                             List<Integer> recup = new ArrayList<Integer>();
@@ -147,16 +149,15 @@ public class Level extends Fragment {
                             for(int i = 0; i < count; i++)
                                 recup.add(pref.getInt(Constants.PREFS_COLLECTION_VAL_PREFIX+i, i));
 
-                            for(int uneCarte : cards)
+                            for(int uneCarte : cardsUnique)
                                 if(!recup.contains(uneCarte))
-                                    recup.add(uneCarte);
+                                    toSave.add(uneCarte);
 
-                            savePreferences(recup);
+                            savePreferences(toSave);
 
 
                         } else {
-                            Set<Integer> cardsUnique = new HashSet<>(cards);
-                            savePreferences(new ArrayList<>(cardsUnique));
+                            savePreferences(cardsUnique);
                         }
 
 

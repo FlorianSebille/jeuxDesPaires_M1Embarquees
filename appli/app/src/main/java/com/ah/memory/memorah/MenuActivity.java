@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.content.SharedPreferences;
 import android. content. Context;
-import android.widget.Toast;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -95,7 +93,6 @@ public class MenuActivity extends AppCompatActivity {
                 .putBoolean(Constants.PREFS_MUSIC, switchMusic.isChecked())
                 .apply();
 
-        Toast.makeText(this, "Sauvegardé, relancez l'application pour voir le résultat", Toast.LENGTH_SHORT).show();
     }
 
     @Override

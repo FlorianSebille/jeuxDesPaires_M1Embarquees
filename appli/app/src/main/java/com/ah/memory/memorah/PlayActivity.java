@@ -1,20 +1,12 @@
 package com.ah.memory.memorah;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.LinkagePager;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +21,6 @@ import me.crosswall.lib.coverflow.CoverFlow;
 import me.crosswall.lib.coverflow.core.LinkagePagerContainer;
 import me.crosswall.lib.coverflow.core.PageItemClickListener;
 
-/**
- * Created by yuweichen on 16/5/3.
- */
 public class PlayActivity extends AppCompatActivity{
     private LinkagePagerContainer customPagerContainer;
     private LinkagePager pager;
@@ -97,7 +86,9 @@ public class PlayActivity extends AppCompatActivity{
                 Intent intent = new Intent(PlayActivity.this, GameActivity.class);
                 intent.putExtra("difficulty",((SeekBar)pager.getChildAt(pager.getCurrentItem()).findViewById(R.id.seekBarDifficulty)).getProgress());
                 intent.putExtra("world", world);
+                finish();
                 startActivity(intent);
+
             }
         });
     }
