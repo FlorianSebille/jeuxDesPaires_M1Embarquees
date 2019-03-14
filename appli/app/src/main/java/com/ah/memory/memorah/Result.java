@@ -136,12 +136,17 @@ public class Result extends Fragment {
             @Override
             public void run() {
                 square4_flip.flipTheView();
-                if(win){
-                    new SoundPlayer(getContext()).playSound("win.mp3");
-                }else {
-                    new SoundPlayer(getContext()).playSound("lost.mp3");
 
+                boolean sounds = pref.getBoolean(Constants.PREFS_SOUNDS, false);
+                if(sounds){
+                    if(win){
+                        new SoundPlayer(getContext()).playSound("win.mp3");
+                    }else {
+                        new SoundPlayer(getContext()).playSound("lost.mp3");
+
+                    }
                 }
+
             }
         },2000);
 

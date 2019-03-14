@@ -78,10 +78,6 @@ public class MenuActivity extends AppCompatActivity {
 
         switchSounds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // A FAIRE EN FONTION DES SONS QUI SERONT RAJOUTES
-                //if(isChecked)
-                    //MainActivity.musicOn();
-                //else MainActivity.musicOff();
                 savePreferences();
             }
         });
